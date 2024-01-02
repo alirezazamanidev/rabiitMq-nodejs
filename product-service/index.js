@@ -1,5 +1,6 @@
 const express=require('express');
 const { ProductRouter } = require('./handler/product');
+require('./config/mongoose.config')
 const app=express();
 require('dotenv').config();
 const {PORT}=process.env;
@@ -19,5 +20,5 @@ app.use((err,req,res,next)=>{
 })
 
 app.listen(PORT,()=>{
-    console.log("Run > localhost:3002");
+    console.log("Run > localhost:3003");
 })
