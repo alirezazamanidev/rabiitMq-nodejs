@@ -12,7 +12,14 @@ router.post('/create',async(req,res,next)=>{
         next(error)
     }
 })
-
+router.post('/buy',async(req,res,next)=>{
+    try {
+      const {productsId=[]}=req.body;
+      const products=await ProductModel.find({_id:{$in:productsId}}); 
+    } catch (error) {
+        next(error)
+    }
+})
 module.exports={
     ProductRouter:router
 }
