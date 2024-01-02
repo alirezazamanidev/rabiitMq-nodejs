@@ -3,6 +3,7 @@ const { AuthRouter } = require('./handler/auth');
 const app=express();
 require('dotenv').config();
 const {PORT}=process.env;
+require('./config/mongoose.config');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
