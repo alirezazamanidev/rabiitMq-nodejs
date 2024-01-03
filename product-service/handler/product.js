@@ -1,3 +1,5 @@
+const { pushToQueue } = require('../../auth-service/config/rabbitMq.config');
+const { IsAuth } = require('../../isAuth');
 const { ProductModel } = require('../model/product');
 
 const router=require('express').Router();
@@ -12,10 +14,11 @@ router.post('/create',async(req,res,next)=>{
         next(error)
     }
 })
-router.post('/buy',async(req,res,next)=>{
+router.post('/buy',IsAuth,async(req,res,next)=>{
     try {
       const {productsId=[]}=req.body;
       const products=await ProductModel.find({_id:{$in:productsId}}); 
+      await pushToQueue('ORDER',{products,email:req.user.email});
     } catch (error) {
         next(error)
     }
