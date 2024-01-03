@@ -23,7 +23,7 @@ router.use('/login',async(req,res,next)=>{
         if(!user) throw {message:"The user not found"};
         if(user.password!==password)throw {message:"The user not found"};
         delete user.password;
-        jwt.sign({userId:user.id,name:user.name,email:user.email},'dkefifiif',(err,token)=>{
+        jwt.sign({userId:user.id,name:user.name,email:user.email},'secrertKey',(err,token)=>{
             if(err) return res.json({error:err.message});
             return res.json({
                 token
